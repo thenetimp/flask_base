@@ -123,6 +123,7 @@ class User(db.Model, UserMixin):
             return user
         return None
 
+
     @staticmethod
     def logout_user():
         logout_user()
@@ -136,4 +137,3 @@ class User(db.Model, UserMixin):
         db.session.add(user)
         db.session.commit()
         return user
-        

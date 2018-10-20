@@ -1,16 +1,19 @@
+from datetime import datetime, timedelta
+
 from flask import Blueprint, request,  session, render_template, url_for, redirect, flash
-from project.forms.user_forms import LoginForm, SignUpForm, ForgotPasswordForm, ForgotPasswordResetForm
 from flask_login import current_user
+
+from project.forms.user_forms import LoginForm, SignUpForm, ForgotPasswordForm, ForgotPasswordResetForm
 from project.models import User
 from project.utils.emails import send_password_reset_token
-from datetime import datetime, timedelta
+from project.uri_paths import uri_paths
 
 user_views = Blueprint('user_views', __name__)
 
 ##############################
 # User register
 ##############################
-@user_views.route('/sign-up', methods=['GET','POST'])
+@user_views.route(uri_paths['user_signup'], methods=['GET','POST'])
 def page_register():
 
     form = SignUpForm()
@@ -26,7 +29,7 @@ def page_register():
 ##############################
 # User Login
 ##############################
-@user_views.route('/log-in', methods=['GET','POST'])
+@user_views.route(uri_paths['user_login'], methods=['GET','POST'])
 def page_login():
     
     form = LoginForm()
@@ -43,7 +46,7 @@ def page_login():
 ##############################
 # User Login
 ##############################
-@user_views.route('/log-out', methods=['GET'])
+@user_views.route(uri_paths['user_logout'], methods=['GET'])
 def page_logout():
     User.logout_user()
     return redirect(url_for('core_views.page_index'))
@@ -52,7 +55,7 @@ def page_logout():
 ##############################
 # User Profile
 ##############################
-@user_views.route('/profile', methods=['GET'])
+@user_views.route(uri_paths['user_profile'], methods=['GET'])
 def page_profile():
     return render_template('v1/user/profile.html')
     
@@ -60,7 +63,7 @@ def page_profile():
 ##############################
 # User Password Forget
 ##############################
-@user_views.route('/forgot-password', methods=['GET','POST'])
+@user_views.route(uri_paths['user_forgot_password'], methods=['GET','POST'])
 def page_forgot_password():
 
     user = None
@@ -78,17 +81,17 @@ def page_forgot_password():
     
 
 ##############################
-# User Password Forget
+# User Password Forget Processed
 ##############################
-@user_views.route('/forgot-password-request-processed', methods=['GET','POST'])
+@user_views.route(uri_paths['user_forgot_password_processed'], methods=['GET','POST'])
 def page_forgot_password_request_processed():
     return render_template('v1/user/forgot-password-processed.html')
     
 
 ##############################
-# User Password Forget
+# User Password Reset with Token
 ##############################
-@user_views.route('/password-reset-with-token/<reset_token>', methods=['GET','POST'])
+@user_views.route(uri_paths['user_password_reset_with_token'], methods=['GET','POST'])
 def page_password_reset_with_token(reset_token):
     user = User.get_user_by_reset_token(reset_token);
     if user is None or user.password_request_token_expire_at is None:
