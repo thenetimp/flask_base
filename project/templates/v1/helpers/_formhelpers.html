@@ -1,0 +1,53 @@
+{% macro render_field(field) %}
+  <div class="form-group">
+    {{ field.label }}
+    {{ field(**kwargs)|safe }}
+    {{ render_field_error(field) }}
+  </div>
+{% endmacro %}
+
+{% macro render_field_with_placeholder(field) %}
+  <div class="form-group">
+    {{ field(**dict(kwargs, placeholder=field.label.text, class="form-control input-lg"))|safe }}
+    {{ render_field_error(field) }}
+  </div>
+{% endmacro %}
+
+{% macro render_checkbox(field) %}
+  <div class="form-group">
+    {{ field.label(class="checkbox") }}
+    {{ field(**kwargs)|safe }}
+  </div>
+{% endmacro %}
+
+
+{% macro render_button(field) %}
+<button class="btn btn-order btn-block" type="submit"><span class="bolder">{{ field.label.text }}</span></button>
+{% endmacro %}
+
+
+{% macro render_field_error(field) %}
+<div class="error-invalid {{ field.errors | field_has_errors }}">
+{{ field.errors[0] }}
+</div>
+{% endmacro %}
+
+
+{% macro render_form_errors(form) %}
+  {% if form.errors: %}
+    <div class="row" style="padding: 0 40px; box-sizing: border-box; margin: 45px 0 0 0">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <p>We encountered an error while processing your registration</p>
+          <ul class="errors">
+          {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+            <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}

@@ -1,0 +1,60 @@
+{% extends 'v1/base/main.html' %}
+{% from "v1/helpers/_formhelpers.html" import render_field_with_placeholder, render_form_errors %}
+
+{% block page_styles %}
+<style type="text/css">
+  .colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3">
+  		<form role="form" novalidate method="POST">
+        {{ form.hidden_tag() }}
+  			<h2>Please Sign Up <!-- small>It's free and always will be.</small --></h2>
+  			<hr class="colorgraph">
+  			<div class="row">
+  				<div class="col-xs-12 col-sm-6 col-md-6">
+            {{ render_field_with_placeholder(form.first_name, tabindex="1") }}
+  				</div>
+  				<div class="col-xs-12 col-sm-6 col-md-6">
+            {{ render_field_with_placeholder(form.last_name, tabindex="2") }}
+  				</div>
+  			</div>
+        {{ render_field_with_placeholder(form.display_name, tabindex="3") }}
+        {{ render_field_with_placeholder(form.email_address, tabindex="4") }}
+  			<div class="row">
+  				<div class="col-xs-12 col-sm-6 col-md-6">
+            {{ render_field_with_placeholder(form.password, tabindex="5") }}
+  				</div>
+  				<div class="col-xs-12 col-sm-6 col-md-6">
+            {{ render_field_with_placeholder(form.confirm_password, tabindex="6") }}
+  				</div>
+  			</div>
+  			<div class="row">
+  				<div class="col-xs-12 col-sm-12 col-md-12">
+  					 By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="{{ url_for('core_views.page_terms_of_service') }}" adata-toggle="modal" adata-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
+  				</div>
+  			</div>
+			
+  			<hr class="colorgraph">
+  			<div class="row">
+  				<div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+  			</div>
+  		</form>
+  	</div>
+  </div>
+</div>
+
+{% endblock %}

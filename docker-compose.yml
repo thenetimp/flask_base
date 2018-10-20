@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+
+  flask_db:
+    image: mysql:latest
+    container_name: flask_db
+    env_file:
+      - ./env/dev.env
+    ports:
+      - 3315:3306
+    tty: true
+    volumes:
+      - ./database:/var/lib/mysql
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 49999
+        hard: 99999

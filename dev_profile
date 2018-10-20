@@ -1,0 +1,1 @@
+export FLASK_BASE_CONFIG="../config/settings.cfg"

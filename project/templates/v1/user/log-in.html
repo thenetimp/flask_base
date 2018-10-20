@@ -1,0 +1,62 @@
+{% extends 'v1/base/main.html' %}
+{% from "v1/helpers/_flashedhelpers.html" import flashed_message_basic %}
+{% from "v1/helpers/_formhelpers.html" import render_field_with_placeholder, render_form_errors %}
+
+
+{% block page_styles %}
+<style type="text/css">
+  .colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row" style="margin-top:20px">
+    <div class="col-xs-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3">
+
+      {% for message in get_flashed_messages(with_categories=true) %}
+      {{ flashed_message_basic(message) }}
+      {% endfor %}
+      
+  		<form role="form" novalidate method="POST">
+        {{ form.hidden_tag() }}
+          <fieldset>
+  				<h2>Please Sign In</h2>
+  				<hr class="colorgraph">
+  				<div class="form-group">
+            {{ render_field_with_placeholder(form.email_address, tabindex="1") }}
+  				</div>
+  				<div class="form-group">
+            {{ render_field_with_placeholder(form.password, tabindex="1") }}
+  				</div>
+  				<span class="button-checkbox">
+            <!-- <button type="button" class="btn" data-color="info">Remember Me</button>
+                      <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+            <a href="{{ url_for('user_views.page_forgot_password') }}" class="btn btn-link pull-right">Forgot Password?</a> -->
+  				</span>
+    			<div class="row">
+    				<div class="col-xs-12 col-sm-12 col-md-12">
+    					 <a href="{{ url_for('user_views.page_forgot_password') }}">Forgot Password</a>
+    				</div>
+    			</div>
+  				<hr class="colorgraph">
+  				<div class="row">
+  					<div class="col-xs-6 col-sm-6 col-md-6">
+              <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
+  					</div>
+  				</div>
+  			</fieldset>
+  		</form>
+  	</div>
+  </div>
+</div>
+{% endblock %}

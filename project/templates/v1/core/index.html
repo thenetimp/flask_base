@@ -1,0 +1,10 @@
+{% extends 'v1/base/main.html' %}
+
+{% block page_content %}
+<div class="container">
+  <div class="col-md-12">
+    test
+    {{ current_user.is_authenticated }}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+
+.error-invalid{
+  color: #f00;
+  display: none;
+  
+  &.visible-error {
+    display: block !important;
+  }
+} 
