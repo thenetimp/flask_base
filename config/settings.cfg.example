@@ -1,0 +1,22 @@
+DEBUG = True
+SECRET_KEY = b'mysecretkey'
+EXEMPT_METHODS = set(['OPTIONS'])
+SITE_HOST='http://localhost:5000'
+
+#############################
+# Production Database 
+############################
+SQLALCHEMY_DATABASE_URI = 'mysql://flaskdb:flaskdb@127.0.0.1:3315/flaskdb'
+SQLALCHEMY_TRACK_MODIFICATIONS=False
+
+SITE_LOGIN_ON_SIGNUP=True
+
+#############################
+# Email SMTP Settings
+############################
+SRC_EMAIL_ADDRESS = 'myuser@somedomain.com'
+SMTP_HOST = 'smtp.somedomain.com'
+SMTP_PORT = 587
+SMTP_USER="myuser@somedomain.com"
+SMTP_PASSWORD = "my super secret password that is super secret"
+
