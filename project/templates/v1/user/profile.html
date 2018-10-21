@@ -1,9 +1,14 @@
 {% extends 'v1/base/main.html' %}
+{% from "v1/helpers/_flashedhelpers.html" import flashed_message_basic %}
 
 {% block page_content %}
 <div class="container">
   <div class="row" style="margin-top:20px">
     <div class="col-xs-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3">
+      {% for message in get_flashed_messages(with_categories=true) %}
+      {{ flashed_message_basic(message) }}
+      {% endfor %}
+      
       Profile ( <a href="{{ url_for('user_views.page_profile_edit') }}">Edit</a>)
       
       <table class="table">

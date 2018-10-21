@@ -82,7 +82,7 @@ def page_profile_edit():
         current_user.save()
         
         flash('Profile updated.', 'success')
-        return redirect(url_for('user_views.page_profile_edit'))
+        return redirect(url_for('user_views.page_profile'))
         
     
     return render_template('v1/user/profile_edit.html', form=form)
