@@ -8,8 +8,8 @@ How to get started.
 1) Flask Base is built on Python 3.x, so make sure that you have it available on your local machine.
 2) Install virtualenv if you don't have it installed already.
 3) Clone this repository to your local machine.
-4) cd flask_base and then virtualenv -p python3 .
-5) source ./bin/activate
+4) ```cd flask_base``` and then ```virtualenv -p python3 .```
+5) ```source ./bin/activate``` to start your virtual environment
 
 6) Make sure docker is installed and running.
 7) ```docker-compose up -d``` this will bring up mysql on port 3315 so you have a database.
