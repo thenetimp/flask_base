@@ -13,8 +13,6 @@ How to get started.
 
 6) Make sure docker is installed and running.
 7) ```docker-compose up -d``` this will bring up mysql on port 3315 so you have a database.
-8) Run this command to build your database from the migration files.
-```
-flask db upgrade
-```
+8) Run ```flask db upgrade``` to build your database from the migration files.
+
 9) ```python app.py``` to start the python development webserver
