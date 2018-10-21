@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from flask import Blueprint, request,  session, render_template, url_for, redirect, flash
 from flask_login import current_user
 
-from project.forms.user_forms import LoginForm, SignUpForm, ForgotPasswordForm, ForgotPasswordResetForm
+from project.forms.user_forms import LoginForm, SignUpForm, ForgotPasswordForm, ProfileEditForm, ForgotPasswordResetForm
 from project.models import User
 from project.utils.emails import send_password_reset_token
 from project.uri_paths import uri_paths
@@ -58,6 +58,34 @@ def page_logout():
 @user_views.route(uri_paths['user_profile'], methods=['GET'])
 def page_profile():
     return render_template('v1/user/profile.html')
+    
+
+##############################
+# Edit User Profile
+##############################
+@user_views.route(uri_paths['user_profile_edit'], methods=['GET', 'POST'])
+def page_profile_edit():
+    
+    form = ProfileEditForm()
+
+    if request.method != "POST":
+        form.email_address.data = current_user.email_address
+        form.display_name.data = current_user.display_name
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+
+    if form.validate_on_submit():
+        current_user.email_address = form.email_address.data
+        current_user.display_name = form.display_name.data
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.save()
+        
+        flash('Profile updated.', 'success')
+        return redirect(url_for('user_views.page_profile_edit'))
+        
+    
+    return render_template('v1/user/profile_edit.html', form=form)
     
 
 ##############################

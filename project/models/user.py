@@ -58,12 +58,16 @@ class User(db.Model, UserMixin):
         self.password_request_token_expire_at = None
 
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+
     def update_password_and_save(self, password):
         self.password_hash = bcrypt.generate_password_hash(password=password)
         self.password_request_token = None
         self.password_request_token_expire_at = None
-        db.session.add(self)
-        db.session.commit()
+        self.save()
 
 
     def user_fullname(self):
@@ -83,8 +87,7 @@ class User(db.Model, UserMixin):
     @staticmethod
     def create_user(first_name, last_name, email_address, password, display_name):
         user = User(first_name=first_name, last_name=last_name, email_address=email_address, password=password, display_name=display_name)
-        db.session.add(user)
-        db.session.commit()
+        user.save()
         login_user(user)
         return user
 
@@ -102,8 +105,7 @@ class User(db.Model, UserMixin):
                 token = uuid.uuid4().hex
                 user.password_request_token = token
                 user.password_request_token_expire_at = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.now() + timedelta(hours=24))
-                db.session.add(user)
-                db.session.commit()
+                user.save()
 
         # Retuen the user object    
         return user
@@ -134,6 +136,5 @@ class User(db.Model, UserMixin):
     def save_password(email_address, password):
         user = User.query.filter_by(email_address=email_address).first()
         user.encrypt_password(password)
-        db.session.add(user)
-        db.session.commit()
+        user.save()
         return user

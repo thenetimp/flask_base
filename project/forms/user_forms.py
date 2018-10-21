@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, HiddenField, PasswordField, SelectField, SubmitField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email, EqualTo 
-from project.forms.validators import UniqueUserEmail, UniqueUserDisplayName
+from project.forms.validators import ProfileUniqueUserEmail, ProfileUniqueUserDisplayName, UniqueUserEmail, UniqueUserDisplayName
 
 
 __ALL__ = [
@@ -29,6 +29,14 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password',validators=[DataRequired()])    
     remember = BooleanField('Remember me')    
     submit = SubmitField('Log In')
+
+
+class ProfileEditForm(FlaskForm):
+    first_name = StringField('First Name',validators=[DataRequired()])
+    last_name = StringField('Last Name',validators=[DataRequired()])
+    display_name = StringField('Display Name',validators=[DataRequired(), ProfileUniqueUserDisplayName()])
+    email_address = EmailField('Email Address',validators=[DataRequired(), Email(), ProfileUniqueUserEmail()])
+    submit = SubmitField('Save Profile')
 
 
 class SignUpForm(FlaskForm):

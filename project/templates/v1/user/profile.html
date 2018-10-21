@@ -4,7 +4,31 @@
 <div class="container">
   <div class="row" style="margin-top:20px">
     <div class="col-xs-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3">
-      Profile
+      Profile ( <a href="{{ url_for('user_views.page_profile_edit') }}">Edit</a>)
+      
+      <table class="table">
+        <tr>
+          <td>Email Address</td>
+          <td>{{ current_user.email_address }}</td>
+        </tr>
+        <tr>
+          <td>First Name</td>
+          <td>{{ current_user.first_name }}</td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td>{{ current_user.last_name }}</td>
+        </tr>
+        <tr>
+          <td>Display Name</td>
+          <td>{{ current_user.display_name }}</td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>************</td>
+        </tr>
+      </table>
+      
   	</div>
   </div>
 </div>
