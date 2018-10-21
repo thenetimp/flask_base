@@ -64,6 +64,6 @@ class ProfileUniqueUserDisplayName(object):
 
     def __call__(self, form, field):
         user = User.query.filter_by(display_name=field.data).first()
-        if user.id != current_user.id and user is not None:
+        if user is not None and user.id != current_user.id:
             raise ValidationError(self.message)
 

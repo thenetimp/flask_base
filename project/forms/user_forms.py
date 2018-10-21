@@ -34,16 +34,16 @@ class LoginForm(FlaskForm):
 class ProfileEditForm(FlaskForm):
     first_name = StringField('First Name',validators=[DataRequired()])
     last_name = StringField('Last Name',validators=[DataRequired()])
-    display_name = StringField('Display Name',validators=[DataRequired(), ProfileUniqueUserDisplayName()])
-    email_address = EmailField('Email Address',validators=[DataRequired(), Email(), ProfileUniqueUserEmail()])
+    display_name = StringField('Display Name',validators=[DataRequired(), ProfileUniqueUserDisplayName("This display name is in use by another account.")])
+    email_address = EmailField('Email Address',validators=[DataRequired(), Email(), ProfileUniqueUserEmail("This email address is in use by another account.")])
     submit = SubmitField('Save Profile')
 
 
 class SignUpForm(FlaskForm):
     first_name = StringField('First Name',validators=[DataRequired()])
     last_name = StringField('Last Name',validators=[DataRequired()])
-    display_name = StringField('Display Name',validators=[DataRequired(), UniqueUserDisplayName()])
-    email_address = EmailField('Email Address',validators=[DataRequired(), Email(), UniqueUserEmail()])
+    display_name = StringField('Display Name',validators=[DataRequired(), UniqueUserDisplayName("This display name is in use by another account.")])
+    email_address = EmailField('Email Address',validators=[DataRequired(), Email(), UniqueUserEmail("This email address is in use by another account.")])
     password = PasswordField('Password',validators=[DataRequired()])    
     confirm_password = PasswordField('Confirm Password',validators=[DataRequired(),EqualTo('password',message="Passwords do not match")])    
     submit = SubmitField('Register')
